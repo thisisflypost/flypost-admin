@@ -7,12 +7,24 @@ export default (plugin) => {
         populate: {
           following: {
             fields: ["id", "username"],
-            populate: ["events"],
+            populate: {
+              events: {
+                populate: {
+                  publisher: {
+                    fields: ["id", "username"],
+                  },
+                },
+              },
+            },
           },
         },
       }
     );
-    ctx.body = userWithFollowing.following;
+    let events = [];
+    userWithFollowing.following.forEach((publisher) => {
+      events = [...events, ...publisher.events];
+    });
+    ctx.body = events;
   };
 
   const usersMeIndex = plugin.routes["content-api"].routes.findIndex(
