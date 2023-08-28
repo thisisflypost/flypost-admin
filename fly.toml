@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for flypost-server on 2023-08-28T22:50:22+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "flypost-server"
+primary_region = "lhr"
+
+[build]
+  dockerfile = "Dockerfile.prod"
+
+[http_service]
+  internal_port = 1337
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[env]
+  DATABASE_CLIENT = "postgres"
+  DATABASE_HOST = "flypost-server-db.internal"
+  DATABASE_PORT = 5432
+  DATABASE_NAME = "flypost"
+  DATABASE_USERNAME = "postgres"
