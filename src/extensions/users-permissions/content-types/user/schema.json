@@ -65,18 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "following": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "followers"
-    },
-    "followers": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "following"
-    },
     "events": {
       "type": "relation",
       "relation": "oneToMany",
