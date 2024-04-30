@@ -26,6 +26,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "events"
+    },
+    "organizations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::organization.organization",
+      "inversedBy": "events"
     }
   }
 }
