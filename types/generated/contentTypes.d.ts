@@ -382,6 +382,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'manyToMany',
       'api::organizer.organizer'
     >;
+    description: Attribute.RichText & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

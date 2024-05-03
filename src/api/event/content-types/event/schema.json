@@ -26,6 +26,10 @@
       "relation": "manyToMany",
       "target": "api::organizer.organizer",
       "inversedBy": "events"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
