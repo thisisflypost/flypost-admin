@@ -374,7 +374,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     startTime: Attribute.DateTime;
     endTime: Attribute.DateTime;
     organizers: Attribute.Relation<
