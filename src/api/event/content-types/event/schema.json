@@ -21,16 +21,10 @@
     "endTime": {
       "type": "datetime"
     },
-    "publisher": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "events"
-    },
-    "organizations": {
+    "organizers": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::organization.organization",
+      "target": "api::organizer.organizer",
       "inversedBy": "events"
     }
   }

@@ -377,15 +377,10 @@ export interface ApiEventEvent extends Schema.CollectionType {
     title: Attribute.String;
     startTime: Attribute.DateTime;
     endTime: Attribute.DateTime;
-    publisher: Attribute.Relation<
-      'api::event.event',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    organizations: Attribute.Relation<
+    organizers: Attribute.Relation<
       'api::event.event',
       'manyToMany',
-      'api::organization.organization'
+      'api::organizer.organizer'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -405,21 +400,21 @@ export interface ApiEventEvent extends Schema.CollectionType {
   };
 }
 
-export interface ApiOrganizationOrganization extends Schema.CollectionType {
-  collectionName: 'organizations';
+export interface ApiOrganizerOrganizer extends Schema.CollectionType {
+  collectionName: 'organizers';
   info: {
-    singularName: 'organization';
-    pluralName: 'organizations';
-    displayName: 'Organisation';
+    singularName: 'organizer';
+    pluralName: 'organizers';
+    displayName: 'Organiser';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required & Attribute.Unique;
     events: Attribute.Relation<
-      'api::organization.organization',
+      'api::organizer.organizer',
       'manyToMany',
       'api::event.event'
     >;
@@ -427,13 +422,13 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::organization.organization',
+      'api::organizer.organizer',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::organization.organization',
+      'api::organizer.organizer',
       'oneToOne',
       'admin::user'
     > &
@@ -802,11 +797,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    events: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::event.event'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -882,7 +872,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::event.event': ApiEventEvent;
-      'api::organization.organization': ApiOrganizationOrganization;
+      'api::organizer.organizer': ApiOrganizerOrganizer;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
